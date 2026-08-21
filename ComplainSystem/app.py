@@ -1,17 +1,19 @@
+import os
+
 from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 from datetime import datetime
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-this-secret-key")
 
 # ---------- EMAIL CONFIG ----------
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'yashika9569597936@gmail.com'  # your Gmail
-app.config['MAIL_PASSWORD'] = 'atmejnaohmcyezxk'             # your app password
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 mail = Mail(app)
 
 # ---------- DATABASE SETUP ----------
