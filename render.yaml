@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: aviothic-complaint-system
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --chdir ComplainSystem app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
